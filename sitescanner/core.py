@@ -40,7 +40,10 @@ def predict_binding_sites(pdb_file_path: str, model_path: str, device: str = 'cp
         probability_threshold: Threshold for classifying a residue as binding site.
 
     Returns:
-        A list of residue IDs predicted to be part of the binding site.
+        A tuple containing:
+            - A list of residue IDs predicted to be part of the binding site.
+            - The raw prediction probabilities (numpy array).
+            - The full list of residue IDs corresponding to the probabilities.
         Returns None if graph creation fails.
     """
     if not os.path.exists(pdb_file_path):
@@ -68,7 +71,7 @@ def predict_binding_sites(pdb_file_path: str, model_path: str, device: str = 'cp
         # If using DataLoader later, batching would be handled there.
         # The model's forward method from sbi_model1.py returns (out, proj)
         # We only need 'out' for classification.
-        out_logits, _ = model(graph_data) #
+        out_logits = model(graph_data) # Assuming model returns only logits now based on model_definition
 
     # 4. Process predictions
     probabilities = torch.sigmoid(out_logits).cpu().numpy().flatten() # Apply sigmoid and move to CPU
@@ -79,6 +82,7 @@ def predict_binding_sites(pdb_file_path: str, model_path: str, device: str = 'cp
         res_id for res_id, pred in zip(residue_ids, predictions) if pred == 1
     ] #
 
-    return binding_site_residues
+    # Return predictions and residue IDs as well for use with utils functions
+    return binding_site_residues, predictions, residue_ids
 
 # --- End of sitescanner/core.py ---
