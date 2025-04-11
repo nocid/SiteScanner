@@ -1,0 +1,19 @@
+# Base Requirements for SiteScanner
+
+torch
+torch_geometric
+biopython
+e3nn>=0.5.0 # Example: specifying a minimum version
+numpy
+scipy
+scikit-learn
+joblib
+transformers
+fair-esm
+torch-scatter
+torch-sparse
+torch-cluster
+torch-spline-conv
+
+# Optional: Add development/testing specific libraries below if needed
+# e.g., pytest
