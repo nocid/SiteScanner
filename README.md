@@ -8,7 +8,7 @@ Predict protein binding sites from PDB structures.
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/yourusername/sitescanner # Replace with actual URL
+    git clone https://github.com/nocid/SiteScanner/tree/main 
     cd SiteScanner
     ```
 2.  **(Optional but Recommended) Create a virtual environment:**
