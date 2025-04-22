@@ -1,49 +1,39 @@
 from setuptools import setup, find_packages
 
-# It's good practice to read dependencies from requirements.txt
-# Or list them directly here.
-# Note: Handling the complex PyG install might require extra steps or documentation.
-INSTALL_REQUIRES = [
-    'torch',
-    'torch_geometric',
-    'biopython',  # Covers Bio.PDB etc.
-    'e3nn>=0.5.0', # Specify versions if needed
-    'numpy',
-    'scipy',
-    'scikit-learn', # For sklearn metrics/splits
-    'joblib', # For parallel processing if used outside training script
-    'transformers', # For ESM
-    'fair-esm', # ESM dependency
-    # PyTorch Scatter/Sparse/Cluster/SplineConv are often dependencies of PyG
-    # Pip might handle them via PyG's dependencies, but check PyG install instructions
-    'torch-scatter',
-    'torch-sparse',
-    'torch-cluster',
-    'torch-spline-conv',
-    # Add other direct dependencies if any
-]
+# Read requirements from requirements.txt
+with open('requirements.txt') as f:
+    required = f.read().splitlines()
+   
+    required = [line for line in required if line and not line.startswith('#')]
 
 setup(
     name='sitescanner',
-    version='1.0.0', # Start with an initial version
-    packages=find_packages(), # Automatically find your 'sitescanner' package
-    install_requires=INSTALL_REQUIRES,
-    entry_points={
-        'console_scripts': [
-            'sitescanner = sitescanner.cli:main', # This creates the command-line tool
-        ],
-    },
-    # Add other metadata like author, description, url, etc.
-    author='Romain Pastre, Leyao Jin, Daniel Guiñon Fort',
-    author_email='romain.pastre01@estudiant.upf.edu',
-    description='Predict protein binding sites using deep learning.',
+    version='0.1.0', 
+    author='Romain Pastre, Daniel Guinon Fort, Leyao Jin',
+    author_email='romain.pastre01@estudiant.upf.edu, daniel.guinon01@estudiant.upf.edu, leyao.jin01@estudiant.upf.edu',
+    description='Predict protein binding sites from PDB structures.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/nocid/SiteScanner', # Link to your repo
-    classifiers=[ # PyPI classifiers
+    url='https://github.com/nocid/SiteScanner', 
+    packages=find_packages(),
+    install_requires=required,
+    # Include package data (like weights)
+    package_data={
+        'sitescanner': ['weights/*.pth'],
+    },
+    include_package_data=True,
+    
+    entry_points={
+        'console_scripts': [
+            'sitescanner=sitescanner.cli:main',
+        ],
+    },
+    classifiers=[
         'Programming Language :: Python :: 3',
-        'License :: OSI Approved :: MIT License', # Choose your license
+        'License :: OSI Approved :: MIT License', 
         'Operating System :: OS Independent',
+        'Intended Audience :: Science/Research',
+        'Topic :: Scientific/Engineering :: Bio-Informatics',
     ],
-    python_requires='>=3.8', # Specify compatible Python versions
+    python_requires='>=3.8', 
 )
