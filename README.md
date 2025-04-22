@@ -2,6 +2,8 @@
 
 Predict protein binding sites from PDB structures.
 
+**For detailed documentation, please see the [Documentation Index](./docs/index.md).**
+
 ## Installation
 
 1.  **Clone the repository:**
@@ -81,6 +83,11 @@ To run the unit tests:
 
 ## Model
 
-(Details about the model architecture, training data, and default weights location would go here.)
+### Default Weights
+The default pre-trained model weights are packaged with the library and expected to be located at `sitescanner/weights/model_weights.pt`. You can specify a path to a different model checkpoint file using the `-m` or `--model_path` command-line argument.
 
-The default model weights are expected to be located at `sitescanner/weights/model_weights.pt`. You can specify a different model using the `-m` or `--model_path` argument.
+### Architecture
+The model used is a Geometric Neural Network based on the `MultiScaleEquivariantResidualNet` architecture defined in `sitescanner/model_definition.py`. It utilizes PyTorch Geometric and the `e3nn` library to process protein structures as graphs and perform SE(3)-equivariant operations, allowing it to learn features sensitive to 3D geometry and rotation. Key parameters are defined within the model definition file and used when loading the model in `sitescanner/core.py`.
+
+### Training Data
+To train the model, we used binding site data from the PDBbind dataset that curates pdb structure containing a ligand and a clear binding site.
