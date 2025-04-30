@@ -15,7 +15,7 @@ This page provides detailed instructions for installing and running SiteScanner.
 
 1.  **Clone the Repository:**
     ```bash
-    git clone https://github.com/nocid/SiteScanner # Replace with actual URL
+    git clone https://github.com/nocid/SiteScanner 
     cd SiteScanner
     ```
 
