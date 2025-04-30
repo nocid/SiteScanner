@@ -19,7 +19,7 @@ SiteScanner leverages the power of graph neural networks (GNNs), specifically ut
 ## Navigation
 
 *   **[Installation and Usage](./usage.md):** Detailed instructions on how to install SiteScanner, run predictions, and understand the command-line options.
-*   **[Methodology](./theory.md):** Explanation of the underlying methods, including graph construction, model architecture overview, and the DBSCAN post-processing approach.
+*   **[Methodology](./sitescanner_theory.pdf):** Explanation of the underlying methods, including graph construction, model architecture overview.
 *   **[Analyzing Results](./analyzing_results.md):** Examples of how to perform basic structural analysis on the output files.
 
 ## Getting Started
